@@ -1,4 +1,4 @@
-FROM fedora:33
+FROM fedora:35
 
 RUN dnf install -y sudo findutils tar bzip2 git python3-pip mock copr-cli && \
     dnf clean all
