@@ -15,6 +15,7 @@ WORKDIR ${HOME}
 # Create symlinks for easier development
 RUN sudo ln -s /mockfiles/mariner-1.tpl /etc/mock/templates/mariner-1.tpl
 RUN sudo ln -s /mockfiles/mariner-1-x86_64.cfg /etc/mock/mariner-1-x86_64.cfg
+RUN sudo ln -s /mockfiles/mariner-1-x86_64.cfg /etc/mock/mariner-1-aarch64.cfg
 
 # COPY *.src.rpm /
 
