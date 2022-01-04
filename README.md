@@ -24,8 +24,8 @@ A poc of running mock builds with Mariner rpms
 Chroots are mounted at` /var/lib/mock/<name of cfg>`. Inside the chroot, rpmbuild runs at `/root/builddir/build ` 
 
 Note that in the above commands to run mock, we use
---no-cleanup-after: ensures that the chroot is not removed  
---rpmbuild-opts=--noclean: Passes the –noclean flag to rpmbuild, perserving the rpmbuild directories.  
+- `--no-cleanup-after`: ensures that the chroot is not removed  
+- `--rpmbuild-opts=--noclean`: Passes the –noclean flag to rpmbuild, perserving the rpmbuild directories.  
  
 Once the build is complete, you can enter the chroot using  
 `mock -r /etc/mock/mariner-1-<your arch>.cfg --shell `
