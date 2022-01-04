@@ -1,18 +1,21 @@
 # mariner-mock
 A poc of running mock builds with Mariner rpms
 
-## Start the docker container
+## Quick start
+Clone this repo and perform the following
+
+### Start the docker container
 
 `docker build -t mariner-mock-tester . `
 
 `sudo docker run --privileged -v </local/path/to/>mariner-mock:/mockfiles -it mariner-mock-tester:latest /bin/bash` 
 
-## Start an x86 mock build
+### Start an x86 mock build
 `mock -r /etc/mock/mariner-1-x86_64.cfg --init `
 
 `mock -r /etc/mock/mariner-1-x86_64.cfg --no-cleanup-after --rpmbuild-opts=--noclean  <srpm>`
 
-## Start an aarch64 mock build
+### Start an aarch64 mock build
 `sudo dnf install qemu-user-static`
 
 `mock -r /etc/mock/mariner-1-aarch64.cfg --init`
