@@ -1,5 +1,5 @@
 # mariner-mock
-A poc of running mock builds with Mariner rpms
+A tool for a reproducible builds of Mariner RPM packages. 
 
 ## Quick start
 Clone this repo and perform the following
