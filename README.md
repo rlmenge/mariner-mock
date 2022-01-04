@@ -52,7 +52,9 @@ config_opts['dnf.conf'] = """
 
 [main]
 keepcache=1
-... <needed dnf info> ...
+... 
+<needed dnf info>
+...
 user_agent={{ user_agent }}
 
 [selfhost-repo]
