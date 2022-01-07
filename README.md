@@ -4,18 +4,26 @@ A tool for a reproducible builds of Mariner RPM packages.
 ## Quick start
 Clone this repo and perform the following
 
-### Start the docker container
+## Start the docker container
 
-`docker build -t mariner-mock-tester . `
+First, you must build a mariner-mock image from a base mariner container image...
+### Using an existing mariner container image:
 
-`sudo docker run --privileged -v </local/path/to/>mariner-mock:/mockfiles -it mariner-mock-tester:latest /bin/bash` 
+`./build.sh -i <existing-mariner-image-name>`
 
-### Start an x86 mock build
+### Using a mariner container image .tar:
+
+`./build.sh -t /path/to/mariner-container-image.tar.gz`
+
+### Then... 
+`sudo docker run --privileged -v </local/path/to/>mariner-mock:/mockfiles -it mariner-mock:latest /bin/bash` 
+
+## Start an x86 mock build
 `mock -r /etc/mock/mariner-1-x86_64.cfg --init `
 
 `mock -r /etc/mock/mariner-1-x86_64.cfg --no-cleanup-after --rpmbuild-opts=--noclean  <srpm>`
 
-### Start an aarch64 mock build
+## Start an aarch64 mock build
 `sudo dnf install qemu-user-static`
 
 `mock -r /etc/mock/mariner-1-aarch64.cfg --init`
@@ -23,6 +31,22 @@ Clone this repo and perform the following
 `mock -r /etc/mock/mariner-1-aarch64.cfg --no-cleanup-after --rpmbuild-opts=--noclean  <srpm>`
 
 ## Useful tips
+
+### Adding custom .repo files
+The Dockerfile will copy in *.repo from this repository root into /etc/yum.repos.d inside the mariner-mock container image.
+
+A common use case is if you want to [locally host a repository](https://github.com/hbeberman/rpmrepo) for a set of Mariner RPMS you are actively working on. In this case, you would make a file called localhost.repo:
+
+```
+# localhost.repo
+[selfhost-repo]
+name=Selfhost Build Repo (out/RPMS)
+baseurl=http://<your-ip>:8000
+enabled=1
+gpgcheck=0
+sslverify=0
+```
+And then when the mariner-mock image is built (by calling build.sh) localhost.repo would be copied in and ready to use within mariner-mock containers. 
 ### Enter the chroot
 Chroots are mounted at` /var/lib/mock/<name of cfg>`. Inside the chroot, rpmbuild runs at `/root/builddir/build ` 
 

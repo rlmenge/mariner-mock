@@ -1,6 +1,10 @@
-FROM fedora:35
+ARG image_name="fedora:35"
 
-RUN dnf install -y sudo findutils tar bzip2 git python3-pip mock copr-cli && \
+FROM ${image_name}
+
+COPY *.repo /etc/yum.repos.d/
+
+RUN tdnf install -y sudo findutils dnf tar bzip2 git python3-pip mock copr-cli && \
     dnf clean all
 
 RUN useradd -u 1000 builder && \
