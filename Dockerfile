@@ -1,6 +1,6 @@
-FROM fedora:35
+FROM fedora:36
 
-RUN dnf install -y sudo findutils tar bzip2 git python3-pip mock copr-cli && \
+RUN dnf install -y sudo findutils tar bzip2 git python3-pip mock copr-cli qemu-user-static && \
     dnf clean all
 
 RUN useradd -u 1000 builder && \
