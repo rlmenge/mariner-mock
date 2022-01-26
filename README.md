@@ -16,14 +16,13 @@ Clone this repo and perform the following
 `mock -r /etc/mock/mariner-1-x86_64.cfg --no-cleanup-after --rpmbuild-opts=--noclean  <srpm>`
 
 ### Start an aarch64 mock build
-`sudo dnf install qemu-user-static`
-
 `mock -r /etc/mock/mariner-1-aarch64.cfg --init`
 
 `mock -r /etc/mock/mariner-1-aarch64.cfg --no-cleanup-after --rpmbuild-opts=--noclean  <srpm>`
 
-If you see failures / errors on install, this is most likely due to the qemu interpreter 
-check on your system that the F flag is set
+If you see failures / errors on install, this is most likely due to the qemu interpreter.
+
+Check on your system that the F flag is set
 ` cat /proc/sys/fs/binfmt_misc/qemu-aarch64 `
 if not run:
 ` docker run --rm --privileged multiarch/qemu-user-static --reset -p yes `
