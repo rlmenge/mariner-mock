@@ -22,6 +22,13 @@ Clone this repo and perform the following
 
 `mock -r /etc/mock/mariner-1-aarch64.cfg --no-cleanup-after --rpmbuild-opts=--noclean  <srpm>`
 
+If you see failures / errors on install, this is most likely due to the qemu interpreter 
+check on your system that the F flag is set
+` cat /proc/sys/fs/binfmt_misc/qemu-aarch64 `
+if not run:
+` docker run --rm --privileged multiarch/qemu-user-static --reset -p yes `
+
+
 ## Useful tips
 ### Enter the chroot
 Chroots are mounted at` /var/lib/mock/<name of cfg>`. Inside the chroot, rpmbuild runs at `/root/builddir/build ` 
